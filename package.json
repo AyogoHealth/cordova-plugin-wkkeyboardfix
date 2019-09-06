@@ -1,0 +1,31 @@
+{
+  "name": "cordova-plugin-wkkeyboardfix",
+  "version": "1.0.0",
+  "author": "Ayogo Health Inc. <info@ayogo.com>",
+  "contributors": [
+    "Darryl Pogue <darryl@dpogue.ca>"
+  ],
+  "description": "Cordova plugin to provide a temporary fix for an iOS 12 and 13 bug involving keyboards in WKWebView.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyogoHealth/cordova-plugin-wkkeyboardfix.git"
+  },
+  "keywords": [
+    "cordova",
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "cordova": {
+    "platforms": [
+      "ios"
+    ]
+  },
+  "engines": [
+    {
+      "name": "cordova-ios",
+      "version": ">= 5.0.0"
+    }
+  ],
+  "dependencies": {}
+}
