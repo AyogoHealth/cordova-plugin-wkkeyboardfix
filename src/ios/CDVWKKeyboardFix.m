@@ -8,30 +8,32 @@
 
 @implementation WKWebView (CDVWKKeyboardFix)
 + (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class class = [self class];
+    if (@available(iOS 12.0, *)) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            Class class = [self class];
 
-        // _keyboardChangedWithInfo:adjustScrollView:
-        SEL originalSelector = NSSelectorFromString(UNWRAP_BASE64(@"X2tleWJvYXJkQ2hhbmdlZFdpdGhJbmZvOmFkanVzdFNjcm9sbFZpZXc6"));
-        // _cdv_keyboardChangedWithInfo:adjustScrollView:
-        SEL swizzledSelector = NSSelectorFromString(UNWRAP_BASE64(@"X2Nkdl9rZXlib2FyZENoYW5nZWRXaXRoSW5mbzphZGp1c3RTY3JvbGxWaWV3Og=="));
+            // _keyboardChangedWithInfo:adjustScrollView:
+            SEL originalSelector = NSSelectorFromString(UNWRAP_BASE64(@"X2tleWJvYXJkQ2hhbmdlZFdpdGhJbmZvOmFkanVzdFNjcm9sbFZpZXc6"));
+            // _cdv_keyboardChangedWithInfo:adjustScrollView:
+            SEL swizzledSelector = NSSelectorFromString(UNWRAP_BASE64(@"X2Nkdl9rZXlib2FyZENoYW5nZWRXaXRoSW5mbzphZGp1c3RTY3JvbGxWaWV3Og=="));
 
-        Method originalMethod = class_getInstanceMethod(class, originalSelector);
-        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+            Method originalMethod = class_getInstanceMethod(class, originalSelector);
+            Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
 
-        BOOL didAddMethod = class_addMethod(class, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
+            BOOL didAddMethod = class_addMethod(class, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
 
-        if (didAddMethod) {
-            class_replaceMethod(class, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
-        } else {
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }
-    });
+            if (didAddMethod) {
+                class_replaceMethod(class, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+            } else {
+                method_exchangeImplementations(originalMethod, swizzledMethod);
+            }
+        });
+    }
 }
 
 #pragma mark - Method Swizzling
-- (void)_cdv_keyboardChangedWithInfo:(NSDictionary *)keyboardInfo adjustScrollView:(BOOL)adjustScrollView
+- (void)_cdv_keyboardChangedWithInfo:(NSDictionary *)keyboardInfo adjustScrollView:(BOOL)adjustScrollView API_AVAILABLE(ios(12))
 {
     /* What we *want* is this line of code here (in the WKScrollView):
 
