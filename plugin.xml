@@ -23,7 +23,7 @@ limitations under the License.
   <issues>https://github.com/AyogoHealth/cordova-plugin-wkkeyboardfix/issues</issues>
 
   <engines>
-    <engine name="cordova-ios" version=">= 5.0.0" />
+    <engine name="cordova-ios" version=">= 4.5.0" />
   </engines>
 
   <platform name="ios">
