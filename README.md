@@ -36,7 +36,7 @@ cordova plugin add cordova-plugin-wkkeyboardfix
 Supported Platforms
 -------------------
 
-* **iOS** (cordova-ios >= 5.0.0)
+* **iOS** (cordova-ios >= 4.5.0)
 
 
 Contributing
