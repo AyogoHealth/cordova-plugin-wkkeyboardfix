@@ -21,6 +21,8 @@ This plugin provides a temporary fix for an iOS 12 and 13 bug involving
 keyboards in WKWebView causing scrolling that is not reset when the keyboard is
 dismissed.
 
+As of iOS 13.4, this bug has been fixed.
+
 **Note:** This plugin is a **hack** around a bug in iOS. It might result in
 your app being rejected from the App Store! Use this at your own risk.
 
