@@ -8,7 +8,9 @@
 
 @implementation WKWebView (CDVWKKeyboardFix)
 + (void)load {
-    if (@available(iOS 12.0, *)) {
+    if (@available(iOS 13.4, *)) {
+        // Fixed on iOS >= 13.4
+    } else if (@available(iOS 12.0, *)) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             Class class = [self class];
